@@ -6,6 +6,8 @@
     <h1>Welcome to Herbist</h1>
     <p>Connected to MariaDB version: <% version %></p>
 
+    <p><a href="/add">Add New Herb</a></p>
+
     <h2>Herb List</h2>
     <% IF herbs.size %>
         <table border="1" cellpadding="10">
@@ -15,7 +17,7 @@
                     <th>Common Name</th>
                     <th>Latin Name</th>
                     <th>Description</th>
-                    <th>Upload Photo</th>
+                    <th>Manage</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,12 +33,7 @@
                         <td><% herb.common_name %></td>
                         <td><% herb.latin_name %></td>
                         <td><% herb.description %></td>
-                        <td>
-                            <form action="/upload/<% herb.ID %>" method="post" enctype="multipart/form-data">
-                                <input type="file" name="photo" required>
-                                <button type="submit">Upload</button>
-                            </form>
-                        </td>
+                        <td><a href="/herb/<% herb.ID %>">Manage Details</a></td>
                     </tr>
                 <% END %>
             </tbody>

@@ -1,0 +1,57 @@
+<h1>Add New Herb</h1>
+
+<% IF error %>
+    <p style="color: red;"><% error %></p>
+<% END %>
+
+<form action="/add" method="post">
+    <div>
+        <label>Common Name:</label><br>
+        <input type="text" name="common_name" required style="width: 300px;">
+    </div><br>
+
+    <div>
+        <label>Latin Name:</label><br>
+        <input type="text" name="latin_name" style="width: 300px;">
+    </div><br>
+
+    <div>
+        <label>Synonyms:</label><br>
+        <textarea name="synonyms" rows="3" style="width: 300px;"></textarea>
+    </div><br>
+
+    <div>
+        <label>Other Names:</label><br>
+        <textarea name="other_names" rows="3" style="width: 300px;"></textarea>
+    </div><br>
+
+    <div>
+        <label>Description:</label><br>
+        <textarea name="description" rows="5" style="width: 300px;"></textarea>
+    </div><br>
+
+    <div>
+        <label>Collection:</label><br>
+        <textarea name="collection" rows="3" style="width: 300px;"></textarea>
+    </div><br>
+
+    <div>
+        <label>Uses:</label><br>
+        <textarea name="uses" rows="5" style="width: 300px;"></textarea>
+    </div><br>
+
+    <div>
+        <label>Safety:</label><br>
+        <textarea name="safety" rows="3" style="width: 300px;"></textarea>
+    </div><br>
+
+    <div>
+        <label>Dosage:</label><br>
+        <textarea name="dosage" rows="3" style="width: 300px;"></textarea>
+    </div><br>
+
+    <div>
+        <button type="submit">Add Herb</button>
+        <a href="/">Back to list</a>
+    </div>
+</form>

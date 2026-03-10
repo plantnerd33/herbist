@@ -1,0 +1,52 @@
+<h1>Manage Herb: <% herb.common_name %></h1>
+<p><a href="/">Back to list</a></p>
+
+<div style="display: flex; gap: 20px;">
+    <div>
+        <% IF herb.image_path %>
+            <img src="/<% herb.image_path %>" alt="<% herb.common_name %>" width="300">
+        <% ELSE %>
+            <p>No photo uploaded.</p>
+        <% END %>
+        
+        <h3>Upload/Replace Photo</h3>
+        <form action="/upload/<% herb.ID %>" method="post" enctype="multipart/form-data">
+            <input type="file" name="photo" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <div>
+        <p><strong>Latin Name:</strong> <% herb.latin_name %></p>
+        <p><strong>Description:</strong> <% herb.description %></p>
+        <p><strong>Uses:</strong> <% herb.uses %></p>
+        <p><strong>Safety:</strong> <% herb.safety %></p>
+    </div>
+</div>
+
+<hr>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <% FOR table IN [
+        { id => 'constituents', label => 'Constituents' },
+        { id => 'actions',      label => 'Actions'      },
+        { id => 'energetics',   label => 'Energetics'   },
+        { id => 'indications',  label => 'Indications'  },
+        { id => 'plantfamily',  label => 'Plant Family' },
+        { id => 'bodysystems',  label => 'Body Systems' }
+    ] %>
+        <div style="border: 1px solid #ccc; padding: 10px;">
+            <h3><% table.label %></h3>
+            <ul>
+                <% FOR item IN $table.id %>
+                    <li><% item.name %></li>
+                <% END %>
+            </ul>
+            <form action="/herb/<% herb.ID %>/add_data" method="post">
+                <input type="hidden" name="table" value="<% table.id %>">
+                <input type="text" name="name" placeholder="Add new <% table.label %>" required>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    <% END %>
+</div>
