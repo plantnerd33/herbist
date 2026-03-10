@@ -1,5 +1,5 @@
 # This is the main configuration file for your Dancer2 app
-name: "MyApp"
+name: "Herbist"
 layout: "main"
 template: "template_toolkit"
 show_errors: 1

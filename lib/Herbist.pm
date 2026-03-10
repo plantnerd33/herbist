@@ -1,4 +1,4 @@
-package MyApp;
+package Herbist;
 use Dancer2;
 use Dancer2::Plugin::Database;
 
@@ -12,7 +12,7 @@ get '/' => sub {
     if ($@) {
         warning "Database connection failed: $@";
         return template 'index' => {
-            'title'   => 'MyApp - Error',
+            'title'   => 'Herbist - Error',
             'version' => 'Database connection failed. Please check logs.'
         };
     }
@@ -24,13 +24,13 @@ get '/' => sub {
     if ($@) {
         warning "Database query failed: $@";
         return template 'index' => {
-            'title'   => 'MyApp - Query Error',
+            'title'   => 'Herbist - Query Error',
             'version' => 'Query failed. Please check logs.'
         };
     }
 
     template 'index' => {
-        'title'   => 'MyApp',
+        'title'   => 'Herbist',
         'version' => $res->{version}
     };
 };

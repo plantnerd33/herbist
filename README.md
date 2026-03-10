@@ -14,7 +14,7 @@ This project is a containerized web application built with the Dancer2 Perl fram
 ## Project Structure
 
 - `bin/app.psgi`: Application entry point.
-- `lib/MyApp.pm`: Main application logic and routes.
+- `lib/Herbist.pm`: Main application logic and routes.
 - `config.yml`: Application and database configuration.
 - `views/`: Template files.
 - `Dockerfile`: Container image definition.

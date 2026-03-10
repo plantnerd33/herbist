@@ -2,6 +2,6 @@
 use strict;
 use warnings;
 use lib 'lib';
-use MyApp;
+use Herbist;
 
-MyApp->to_app;
+Herbist->to_app;

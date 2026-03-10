@@ -9,7 +9,7 @@ services:
       - DB_HOST=db
       - DB_USER=myuser
       - DB_PASS=mypassword
-      - DB_NAME=myapp
+      - DB_NAME=herbist
       - DANCER_ENVIRONMENT=development
     depends_on:
       - db
@@ -20,7 +20,7 @@ services:
     image: mariadb:10.6
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_DATABASE=myapp
+      - MYSQL_DATABASE=herbist
       - MYSQL_USER=myuser
       - MYSQL_PASSWORD=mypassword
     ports:
