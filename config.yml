@@ -2,4 +2,11 @@
 name: "Herbist"
 layout: "main"
 template: "template_toolkit"
+
+engines:
+  template:
+    template_toolkit:
+      start_tag: '<%'
+      end_tag:   '%>'
+
 show_errors: 1

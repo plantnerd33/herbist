@@ -15,6 +15,7 @@ services:
       - db
     volumes:
       - .:/app
+      - ./public/uploads:/app/public/uploads
 
   db:
     image: mariadb:10.6
@@ -27,6 +28,7 @@ services:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
 
 volumes:
   db-data:
