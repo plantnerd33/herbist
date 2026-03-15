@@ -66,18 +66,23 @@
             ] %>
                 <div style="margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
                     <label><strong><% table.label %></strong></label><br>
-                    <small>Hold Ctrl/Cmd to select multiple existing:</small><br>
-                    <select name="select_<% table.id %>" multiple style="width: 100%; height: 80px;">
+                    <div style="display: flex; flex-direction: column; gap: 5px; max-height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-top: 5px; background: #fff;">
                         <% all_list = "all_" _ table.id %>
                         <% current_list = "current_" _ table.id %>
-                        <% FOR opt IN $all_list %>
-                            <% is_selected = 0 %>
-                            <% FOR curr IN $current_list %>
-                                <% IF curr == opt %><% is_selected = 1 %><% LAST %><% END %>
+                        <% IF $all_list.size %>
+                            <% FOR opt IN $all_list %>
+                                <% is_selected = 0 %>
+                                <% FOR curr IN $current_list %>
+                                    <% IF curr == opt %><% is_selected = 1 %><% LAST %><% END %>
+                                <% END %>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 2px 0;">
+                                    <input type="checkbox" name="select_<% table.id %>" value="<% opt %>" <% IF is_selected %>checked<% END %>> <% opt %>
+                                </label>
                             <% END %>
-                            <option value="<% opt %>" <% IF is_selected %>selected<% END %>><% opt %></option>
+                        <% ELSE %>
+                            <span style="color: #999;">No existing <% table.label %></span>
                         <% END %>
-                    </select>
+                    </div>
                     <br>
                     <small>Or add new (comma separated):</small><br>
                     <input type="text" name="new_<% table.id %>" placeholder="New <% table.label %>..." style="width: 100%;">
