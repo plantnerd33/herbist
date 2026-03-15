@@ -1,4 +1,4 @@
-requires 'Dancer2';
+requires 'Dancer2', '2.1.0';
 requires 'DBD::MariaDB';
 requires 'Plack';
 requires 'Starman';

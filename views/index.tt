@@ -6,7 +6,18 @@
     <h1>Welcome to Herbist</h1>
     <p>Connected to MariaDB version: <% version %></p>
 
-    <p><a href="/add">Add New Herb</a></p>
+    <p>
+        <strong>Main:</strong> <a href="/add">Add New Herb</a>
+    </p>
+    <p>
+        <strong>Manage Tables:</strong>
+        <a href="/manage/constituents">Constituents</a> | 
+        <a href="/manage/actions">Actions</a> | 
+        <a href="/manage/energetics">Energetics</a> | 
+        <a href="/manage/indications">Indications</a> | 
+        <a href="/manage/plantfamily">Plant Family</a> | 
+        <a href="/manage/bodysystems">Body Systems</a>
+    </p>
 
     <h2>Herb List</h2>
     <% IF herbs.size %>
@@ -17,7 +28,7 @@
                     <th>Common Name</th>
                     <th>Latin Name</th>
                     <th>Description</th>
-                    <th>Manage</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +44,13 @@
                         <td><% herb.common_name %></td>
                         <td><% herb.latin_name %></td>
                         <td><% herb.description %></td>
-                        <td><a href="/herb/<% herb.ID %>">Manage Details</a></td>
+                        <td>
+                            <a href="/herb/<% herb.ID %>">View</a> |
+                            <a href="/herb/<% herb.ID %>/edit">Edit</a> |
+                            <form action="/herb/<% herb.ID %>/delete" method="post" style="display:inline;" onsubmit="return confirm('Really delete this herb?')">
+                                <button type="submit" style="color: red; background: none; border: none; cursor: pointer; text-decoration: underline; padding: 0;">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 <% END %>
             </tbody>

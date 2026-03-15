@@ -1,0 +1,15 @@
+<h1>Edit <% title %></h1>
+
+<form action="/data/<% table %>/<% item.ID %>/edit" method="post">
+    <input type="hidden" name="herb_id" value="<% item.herb_id %>">
+    
+    <div>
+        <label>Name:</label><br>
+        <input type="text" name="name" value="<% item.name %>" required style="width: 300px;">
+    </div><br>
+
+    <div>
+        <button type="submit">Update Entry</button>
+        <a href="/herb/<% item.herb_id %>">Cancel</a>
+    </div>
+</form>

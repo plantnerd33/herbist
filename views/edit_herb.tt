@@ -1,56 +1,56 @@
-<h1>Add New Herb</h1>
+<h1>Edit Herb: <% herb.common_name %></h1>
 
 <% IF error %>
     <p style="color: red;"><% error %></p>
 <% END %>
 
-<form action="/add" method="post">
+<form action="/herb/<% herb.ID %>/edit" method="post">
     <div style="display: flex; gap: 40px;">
         <div style="flex: 1;">
             <h3>Basic Information</h3>
             <div>
                 <label>Common Name:</label><br>
-                <input type="text" name="common_name" required style="width: 100%;">
+                <input type="text" name="common_name" value="<% herb.common_name %>" required style="width: 100%;">
             </div><br>
 
             <div>
                 <label>Latin Name:</label><br>
-                <input type="text" name="latin_name" style="width: 100%;">
+                <input type="text" name="latin_name" value="<% herb.latin_name %>" style="width: 100%;">
             </div><br>
 
             <div>
                 <label>Synonyms:</label><br>
-                <textarea name="synonyms" rows="2" style="width: 100%;"></textarea>
+                <textarea name="synonyms" rows="2" style="width: 100%;"><% herb.synonyms %></textarea>
             </div><br>
 
             <div>
                 <label>Other Names:</label><br>
-                <textarea name="other_names" rows="2" style="width: 100%;"></textarea>
+                <textarea name="other_names" rows="2" style="width: 100%;"><% herb.other_names %></textarea>
             </div><br>
 
             <div>
                 <label>Description:</label><br>
-                <textarea name="description" rows="3" style="width: 100%;"></textarea>
+                <textarea name="description" rows="3" style="width: 100%;"><% herb.description %></textarea>
             </div><br>
 
             <div>
                 <label>Collection:</label><br>
-                <textarea name="collection" rows="2" style="width: 100%;"></textarea>
+                <textarea name="collection" rows="2" style="width: 100%;"><% herb.collection %></textarea>
             </div><br>
 
             <div>
                 <label>Uses:</label><br>
-                <textarea name="uses" rows="3" style="width: 100%;"></textarea>
+                <textarea name="uses" rows="3" style="width: 100%;"><% herb.uses %></textarea>
             </div><br>
 
             <div>
                 <label>Safety:</label><br>
-                <textarea name="safety" rows="2" style="width: 100%;"></textarea>
+                <textarea name="safety" rows="2" style="width: 100%;"><% herb.safety %></textarea>
             </div><br>
 
             <div>
                 <label>Dosage:</label><br>
-                <textarea name="dosage" rows="2" style="width: 100%;"></textarea>
+                <textarea name="dosage" rows="2" style="width: 100%;"><% herb.dosage %></textarea>
             </div>
         </div>
 
@@ -68,9 +68,14 @@
                     <label><strong><% table.label %></strong></label><br>
                     <small>Hold Ctrl/Cmd to select multiple existing:</small><br>
                     <select name="select_<% table.id %>" multiple style="width: 100%; height: 80px;">
-                        <% list_name = table.id %>
-                        <% FOR opt IN $list_name %>
-                            <option value="<% opt %>"><% opt %></option>
+                        <% all_list = "all_" _ table.id %>
+                        <% current_list = "current_" _ table.id %>
+                        <% FOR opt IN $all_list %>
+                            <% is_selected = 0 %>
+                            <% FOR curr IN $current_list %>
+                                <% IF curr == opt %><% is_selected = 1 %><% LAST %><% END %>
+                            <% END %>
+                            <option value="<% opt %>" <% IF is_selected %>selected<% END %>><% opt %></option>
                         <% END %>
                     </select>
                     <br>
@@ -82,7 +87,7 @@
     </div>
 
     <div style="margin-top: 20px; text-align: center;">
-        <button type="submit" style="padding: 10px 20px; font-size: 1.2em;">Save Herb</button>
-        <a href="/">Cancel</a>
+        <button type="submit" style="padding: 10px 20px; font-size: 1.2em;">Update Herb</button>
+        <a href="/herb/<% herb.ID %>">Cancel</a>
     </div>
 </form>

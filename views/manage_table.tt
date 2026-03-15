@@ -1,0 +1,51 @@
+<h1><% title %></h1>
+<p><a href="/">Back to Dashboard</a></p>
+
+<div style="max-width: 600px;">
+    <h3>Add to Master List</h3>
+    <p><small>Adding a name here makes it available in the multiselect for any herb on the "Add" or "Edit" pages.</small></p>
+    <form action="/manage/<% table %>/add" method="post" style="border: 1px solid #ccc; padding: 15px; border-radius: 8px;">
+        <div>
+            <label>Name:</label><br>
+            <input type="text" name="name" required style="width: 100%; padding: 5px;">
+        </div><br>
+        <button type="submit" style="padding: 10px 20px;">Add to <% title %></button>
+    </form>
+</div>
+
+<hr>
+
+<h3>Master List Overview</h3>
+<% IF items.size %>
+    <table border="1" cellpadding="10" style="width: 100%; text-align: left;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% FOR item IN items %>
+                <tr>
+                    <td><% item.name %></td>
+                    <td>
+                        <% IF item.herb_name %>
+                            Linked to: <strong><% item.herb_name %></strong>
+                        <% ELSE %>
+                            <span style="color: green;">Available in Master List</span>
+                        <% END %>
+                    </td>
+                    <td>
+                        <a href="/data/<% table %>/<% item.ID %>/edit">Edit</a> |
+                        <form action="/data/<% table %>/<% item.ID %>/delete" method="post" style="display:inline;" onsubmit="return confirm('Really delete?')">
+                            <button type="submit" style="color: red; border: none; background: none; cursor: pointer; text-decoration: underline; padding: 0;">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% END %>
+        </tbody>
+    </table>
+<% ELSE %>
+    <p>No entries found in this table.</p>
+<% END %>

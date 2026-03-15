@@ -20,33 +20,47 @@
         <p><strong>Latin Name:</strong> <% herb.latin_name %></p>
         <p><strong>Description:</strong> <% herb.description %></p>
         <p><strong>Uses:</strong> <% herb.uses %></p>
-        <p><strong>Safety:</strong> <% herb.safety %></p>
-    </div>
-</div>
+        <h1>Manage Herb: <% herb.common_name %></h1>
+        <p>
+            <a href="/">Back to list</a> | 
+            <a href="/herb/<% herb.ID %>/edit">Edit Herb Info</a>
+        </p>
 
-<hr>
+        <div style="display: flex; gap: 20px;">
+        ...
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <% FOR table IN [
+                { id => 'constituents', label => 'Constituents' },
+                { id => 'actions',      label => 'Actions'      },
+                { id => 'energetics',   label => 'Energetics'   },
+                { id => 'indications',  label => 'Indications'  },
+                { id => 'plantfamily',  label => 'Plant Family' },
+                { id => 'bodysystems',  label => 'Body Systems' }
+            ] %>
+                <div style="border: 1px solid #ccc; padding: 10px;">
+                    <h3><% table.label %></h3>
+                    <ul>
+                        <% FOR item IN $table.id %>
+                            <li>
+                                <% item.name %> 
+                                <span style="font-size: 0.8em;">
+                                    <a href="/data/<% table.id %>/<% item.ID %>/edit">[edit]</a>
+                                    <form action="/data/<% table.id %>/<% item.ID %>/delete" method="post" style="display:inline;" onsubmit="return confirm('Really delete?')">
+                                        <input type="hidden" name="herb_id" value="<% herb.ID %>">
+                                        <button type="submit" style="color: red; background: none; border: none; cursor: pointer; padding: 0;">[x]</button>
+                                    </form>
+                                </span>
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-    <% FOR table IN [
-        { id => 'constituents', label => 'Constituents' },
-        { id => 'actions',      label => 'Actions'      },
-        { id => 'energetics',   label => 'Energetics'   },
-        { id => 'indications',  label => 'Indications'  },
-        { id => 'plantfamily',  label => 'Plant Family' },
-        { id => 'bodysystems',  label => 'Body Systems' }
-    ] %>
-        <div style="border: 1px solid #ccc; padding: 10px;">
-            <h3><% table.label %></h3>
-            <ul>
-                <% FOR item IN $table.id %>
-                    <li><% item.name %></li>
-                <% END %>
-            </ul>
-            <form action="/herb/<% herb.ID %>/add_data" method="post">
-                <input type="hidden" name="table" value="<% table.id %>">
-                <input type="text" name="name" placeholder="Add new <% table.label %>" required>
-                <button type="submit">Add</button>
-            </form>
+                            </li>
+                        <% END %>
+                    </ul>
+                    <form action="/herb/<% herb.ID %>/add_data" method="post">
+                        <input type="hidden" name="table" value="<% table.id %>">
+                        <input type="text" name="name" placeholder="Add new <% table.label %>" required>
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            <% END %>
         </div>
-    <% END %>
+
 </div>
